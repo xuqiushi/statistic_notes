@@ -3,9 +3,7 @@ import unittest
 from hypothesis_testing.distribution_testing.normal_distribution_test import (
     NormalDistributionTest,
 )
-from tests.test_hypothesis_testing.data_mocker.distribution_sampling import (
-    DistributionSampling,
-)
+from data_mocker.distribution_sampling import DistributionSampling
 
 
 class TestDistributionTest(unittest.TestCase):
@@ -52,3 +50,7 @@ class TestDistributionTest(unittest.TestCase):
                 DistributionSampling.generate_exponential_samplings(size=1000)
             )
         )
+
+
+if __name__ == "__main__":
+    unittest.main()
