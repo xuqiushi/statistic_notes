@@ -1,44 +1,54 @@
 import unittest
-import numpy as np
 
-from hypothesis_testing.student_t_test.normal_distribution_test import (
-    NormalDistributionTestCollection,
+from hypothesis_testing.distribution_testing.normal_distribution_test import (
+    NormalDistributionTest,
+)
+from tests.test_hypothesis_testing.data_mocker.distribution_sampling import (
+    DistributionSampling,
 )
 
 
-def generate_normal_samplings(mu: float, sigma: float, size: float) -> np.ndarray:
-    # 生成正态分布数据
-    return np.random.normal(mu, sigma, size)
+class TestDistributionTest(unittest.TestCase):
+    """
+    测试正态分布的假设检验效果
+    """
 
-
-def generate_exponential_samplings(
-    scale: float = 1.0, size: float = 1000
-) -> np.ndarray:
-    # 生成指数分布数据
-    return np.random.exponential(scale, size)
-
-
-class TestDivision(unittest.TestCase):
     COMMON_SAMPLINGS_SIZE = 1000
 
-    def test_test_normal_distribution(self):
+    def test_normal_distribution_test(self):
+        # 检查数据少于50正态分布是否为正态分布
         self.assertTrue(
-            NormalDistributionTestCollection.test_normal_distribution(
-                generate_normal_samplings(0, 1, 30)
+            NormalDistributionTest.test_normal_distribution(
+                DistributionSampling.generate_normal_samplings(3, 5, 30)
             )
         )
+        # 检查数据50-300正态分布是否为正态分布
         self.assertTrue(
-            NormalDistributionTestCollection.test_normal_distribution(
-                generate_normal_samplings(0, 1, 1000)
+            NormalDistributionTest.test_normal_distribution(
+                DistributionSampling.generate_normal_samplings(3, 5, 200)
             )
         )
+        # 检查数据大于300正态分布是否为正态分布
         self.assertTrue(
-            not NormalDistributionTestCollection.test_normal_distribution(
-                generate_exponential_samplings(size=30)
+            NormalDistributionTest.test_normal_distribution(
+                DistributionSampling.generate_normal_samplings(3, 5, 1000)
             )
         )
+        # 检查数据小于50指数分布是否不是正态分布
         self.assertTrue(
-            not NormalDistributionTestCollection.test_normal_distribution(
-                generate_exponential_samplings(size=1000)
+            not NormalDistributionTest.test_normal_distribution(
+                DistributionSampling.generate_exponential_samplings(size=30)
+            )
+        )
+        # 检查数据50-300指数分布是否不是正态分布
+        self.assertTrue(
+            not NormalDistributionTest.test_normal_distribution(
+                DistributionSampling.generate_exponential_samplings(size=200)
+            )
+        )
+        # 检查数据大于300指数分布是否不是正态分布
+        self.assertTrue(
+            not NormalDistributionTest.test_normal_distribution(
+                DistributionSampling.generate_exponential_samplings(size=1000)
             )
         )
