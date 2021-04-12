@@ -12,19 +12,19 @@ class TestStudentTTestIndependenceTwoVariables(unittest.TestCase):
         """
         检查正态分布的假设检验结果
         """
-        array_1 = DistributionSampling(fixed_seed=True).generate_normal_samplings(
+        array_1 = DistributionSampling.generate_normal_samplings(
             mu=3, sigma=3, size=1000
         )
-        array_2 = DistributionSampling(fixed_seed=True).generate_normal_samplings(
+        array_2 = DistributionSampling.generate_normal_samplings(
             mu=3, sigma=4, size=1000
         )
-        array_3 = DistributionSampling(fixed_seed=True).generate_normal_samplings(
+        array_3 = DistributionSampling.generate_normal_samplings(
             mu=4, sigma=3, size=1000
         )
-        array_4 = DistributionSampling(fixed_seed=True).generate_normal_samplings(
+        array_4 = DistributionSampling.generate_normal_samplings(
             mu=4, sigma=3, size=1000
         )
-        array_5 = DistributionSampling(fixed_seed=True).generate_normal_samplings(
+        array_5 = DistributionSampling.generate_normal_samplings(
             mu=5, sigma=3, size=1000
         )
         # 检查双侧结果，方差一致
