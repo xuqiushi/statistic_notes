@@ -28,26 +28,34 @@ class TestStudentTTestIndependenceTwoVariables(unittest.TestCase):
             mu=5, sigma=3, size=1000
         )
         # 检查双侧结果，方差一致
-        student_t_test_two_variables = StudentTTestIndependentTwoVariables(
-            array_3, array_4, 0.05, TTestAlternative.TWO_SIDED
+        self.assertTrue(
+            StudentTTestIndependentTwoVariables(
+                array_3, array_4, 0.05, TTestAlternative.TWO_SIDED
+            )
+            .t_test()
+            .condition_satisfied
         )
-        result = student_t_test_two_variables.t_test()
-        self.assertTrue(result.condition_satisfied)
         # 检查双侧结果，方差不一致
-        student_t_test_two_variables = StudentTTestIndependentTwoVariables(
-            array_1, array_2, 0.05, TTestAlternative.TWO_SIDED
+        self.assertTrue(
+            StudentTTestIndependentTwoVariables(
+                array_1, array_2, 0.05, TTestAlternative.TWO_SIDED
+            )
+            .t_test()
+            .condition_satisfied
         )
-        result = student_t_test_two_variables.t_test()
-        self.assertTrue(not result.condition_satisfied)
         # 检查LESS
-        student_t_test_two_variables = StudentTTestIndependentTwoVariables(
-            array_1, array_3, 0.05, TTestAlternative.TWO_SIDED
+        self.assertTrue(
+            StudentTTestIndependentTwoVariables(
+                array_1, array_3, 0.05, TTestAlternative.TWO_SIDED
+            )
+            .t_test()
+            .condition_satisfied
         )
-        result = student_t_test_two_variables.t_test()
-        self.assertTrue(result.condition_satisfied)
         # 检查more
-        student_t_test_two_variables = StudentTTestIndependentTwoVariables(
-            array_5, array_4, 0.05, TTestAlternative.TWO_SIDED
+        self.assertTrue(
+            StudentTTestIndependentTwoVariables(
+                array_5, array_4, 0.05, TTestAlternative.TWO_SIDED
+            )
+            .t_test()
+            .condition_satisfied
         )
-        result = student_t_test_two_variables.t_test()
-        self.assertTrue(result.condition_satisfied)
