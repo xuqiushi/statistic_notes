@@ -25,5 +25,5 @@ class NormalDistributionTest:
             # anderson_result = scipy.stats.anderson(array, dist="norm")
         else:
             # 如果大于300，则直接使用联合判断，这里融合了峰度与偏度，可以作为类似正态分布的判断
-            statistic, p = scipy.stats.normaltest(array)
+            statistic, p = scipy.stats.normaltest((array - array.mean()) / array.std(ddof=1))
             return p > cls.SINGLE_LIMIT

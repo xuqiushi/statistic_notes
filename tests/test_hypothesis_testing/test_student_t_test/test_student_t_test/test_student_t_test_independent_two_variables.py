@@ -28,34 +28,27 @@ class TestStudentTTestIndependenceTwoVariables(unittest.TestCase):
             mu=5, sigma=3, size=1000
         )
         # 检查双侧结果，方差一致
-        self.assertTrue(
-            StudentTTestIndependentTwoVariables(
-                array_3, array_4, 0.05, TTestAlternative.TWO_SIDED
-            )
-            .t_test()
-            .condition_satisfied
-        )
+        t_test_result = StudentTTestIndependentTwoVariables(
+            array_3, array_4, 0.05, TTestAlternative.TWO_SIDED
+        ).t_test()
+        self.assertTrue(t_test_result.condition_satisfied)
+        self.assertTrue(not t_test_result.rejected)
         # 检查双侧结果，方差不一致
-        self.assertTrue(
-            StudentTTestIndependentTwoVariables(
-                array_1, array_2, 0.05, TTestAlternative.TWO_SIDED
-            )
-            .t_test()
-            .condition_satisfied
-        )
+        t_test_result = StudentTTestIndependentTwoVariables(
+            array_1, array_2, 0.05, TTestAlternative.TWO_SIDED
+        ).t_test()
+        self.assertTrue(t_test_result.condition_satisfied)
+        self.assertTrue(not t_test_result.rejected)
         # 检查LESS
-        self.assertTrue(
-            StudentTTestIndependentTwoVariables(
-                array_1, array_3, 0.05, TTestAlternative.TWO_SIDED
-            )
-            .t_test()
-            .condition_satisfied
-        )
+        t_test_result = StudentTTestIndependentTwoVariables(
+            array_3, array_1, 0.05, TTestAlternative.LESS
+        ).t_test()
+        self.assertTrue(t_test_result.condition_satisfied)
+        self.assertTrue(not t_test_result.rejected)
+
         # 检查more
-        self.assertTrue(
-            StudentTTestIndependentTwoVariables(
-                array_5, array_4, 0.05, TTestAlternative.TWO_SIDED
-            )
-            .t_test()
-            .condition_satisfied
-        )
+        t_test_result = StudentTTestIndependentTwoVariables(
+            array_4, array_5, 0.05, TTestAlternative.GREATER
+        ).t_test()
+        self.assertTrue(t_test_result.condition_satisfied)
+        self.assertTrue(not t_test_result.rejected)
