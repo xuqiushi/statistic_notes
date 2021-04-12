@@ -1,6 +1,6 @@
 import unittest
 
-from hypothesis_testing.distribution_testing.normal_distribution_test import (
+from hypothesis_testing.distribution_test.normal_distribution_test import (
     NormalDistributionTest,
 )
 from data_mocker.distribution_sampling import DistributionSampling

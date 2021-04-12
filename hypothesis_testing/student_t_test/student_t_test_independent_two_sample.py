@@ -1,2 +1,0 @@
-class StudentTTestIndependentTwoSample:
-    pass
