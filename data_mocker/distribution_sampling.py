@@ -3,17 +3,17 @@ import numpy as np
 
 
 class DistributionSampling:
-    def __init__(self, fixed_seed: bool):
-        self.fixed_seed = fixed_seed
-        if fixed_seed:
-            np.random.seed(1)
+    def __init__(self, seed: int = None):
+        self.seed = seed
+        if seed is not None:
+            np.random.seed(seed)
 
     @classmethod
     def generate_normal_samplings(
         cls, mu: float, sigma: float, size: int
     ) -> np.ndarray:
         # 生成正态分布数据
-        return np.random.normal(mu, sigma, size)
+        return scipy.stats.norm.rvs(loc=mu, scale=sigma, size=size)
 
     @classmethod
     def generate_exponential_samplings(

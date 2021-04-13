@@ -2,13 +2,11 @@ import logging
 import numpy as np
 import scipy.stats
 
-from hypothesis_testing.distribution_test.normal_distribution_test import (
-    NormalDistributionTest,
-)
 from hypothesis_testing.student_t_test.entity.t_test_constants import TTestAlternative
 from hypothesis_testing.student_t_test.entity.t_test_result import TTestResult
-from hypothesis_testing.student_t_test.student_t_test_two_variables.student_t_test_two_variables import \
-    StudentTTestTwoVariables
+from hypothesis_testing.student_t_test.student_t_test_two_variables.student_t_test_two_variables import (
+    StudentTTestTwoVariables,
+)
 
 
 class StudentTTestIndependentTwoVariables(StudentTTestTwoVariables):
@@ -30,20 +28,24 @@ class StudentTTestIndependentTwoVariables(StudentTTestTwoVariables):
 
     def t_test(self) -> TTestResult:
         if not self._check_normal():
-            return TTestResult(condition_satisfied=False, p_value=None, rejected=None)
-        levene_p = self._check_variances_homogeneity()
-        if levene_p < 0.05:
-            logging.info(f"二者方差不一致")
-            statistics, p = scipy.stats.ttest_ind(
-                self.array_1,
-                self.array_2,
-                equal_var=False,
-                alternative=str(self.alternative.value),
-            )
-        else:
-            logging.info(f"二者方差一致")
-            statistic, p = scipy.stats.ttest_ind(
+            statistic, p = scipy.stats.mannwhitneyu(
                 self.array_1, self.array_2, alternative=str(self.alternative.value)
             )
-        # 返回是否在给定显著性水平下是否拒绝原假设
-        return self._get_p_result(p)
+            return self._get_p_result(p)
+        else:
+            levene_p = self._check_variances_homogeneity()
+            if levene_p < 0.05:
+                logging.info(f"二者方差不一致")
+                statistics, p = scipy.stats.ttest_ind(
+                    self.array_1,
+                    self.array_2,
+                    equal_var=False,
+                    alternative=str(self.alternative.value),
+                )
+            else:
+                logging.info(f"二者方差一致")
+                statistic, p = scipy.stats.ttest_ind(
+                    self.array_1, self.array_2, alternative=str(self.alternative.value)
+                )
+            # 返回是否在给定显著性水平下是否拒绝原假设
+            return self._get_p_result(p)

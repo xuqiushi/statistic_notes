@@ -17,37 +17,37 @@ class TestDistributionTest(unittest.TestCase):
         # 检查数据少于50正态分布是否为正态分布
         self.assertTrue(
             NormalDistributionTest.test_normal_distribution(
-                DistributionSampling.generate_normal_samplings(3, 5, 30)
+                DistributionSampling(seed=1).generate_normal_samplings(3, 5, 30)
             )
         )
         # 检查数据50-300正态分布是否为正态分布
         self.assertTrue(
             NormalDistributionTest.test_normal_distribution(
-                DistributionSampling.generate_normal_samplings(3, 5, 200)
+                DistributionSampling(seed=2).generate_normal_samplings(3, 5, 200)
             )
         )
         # 检查数据大于300正态分布是否为正态分布
         self.assertTrue(
             NormalDistributionTest.test_normal_distribution(
-                DistributionSampling.generate_normal_samplings(3, 5, 1000)
+                DistributionSampling(seed=3).generate_normal_samplings(3, 5, 1000)
             )
         )
         # 检查数据小于50指数分布是否不是正态分布
         self.assertTrue(
             not NormalDistributionTest.test_normal_distribution(
-                DistributionSampling.generate_exponential_samplings(size=30)
+                DistributionSampling(seed=4).generate_exponential_samplings(size=30)
             )
         )
         # 检查数据50-300指数分布是否不是正态分布
         self.assertTrue(
             not NormalDistributionTest.test_normal_distribution(
-                DistributionSampling.generate_exponential_samplings(size=200)
+                DistributionSampling(seed=5).generate_exponential_samplings(size=200)
             )
         )
         # 检查数据大于300指数分布是否不是正态分布
         self.assertTrue(
             not NormalDistributionTest.test_normal_distribution(
-                DistributionSampling.generate_exponential_samplings(size=1000)
+                DistributionSampling(seed=6).generate_exponential_samplings(size=1000)
             )
         )
 

@@ -35,10 +35,10 @@ class StudentTTestTwoVariables:
             logging.info(f"H0: array_1 == array_2")
             rejected = p <= self.p_thread
         elif self.alternative == TTestAlternative.LESS:
-            logging.info(f"H0: array_1 < array_2")
+            logging.info(f"H0: array_1 >= array_2")
             rejected = p <= self.p_thread
         elif self.alternative == TTestAlternative.GREATER:
-            logging.info(f"H0: array_1 > array_2")
+            logging.info(f"H0: array_1 <= array_2")
             rejected = p <= self.p_thread
         else:
             raise ValueError(f"alternative must be TTestAlternative")
