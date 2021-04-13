@@ -26,3 +26,13 @@ class DistributionSampling:
     def generate_int_samplings(cls, low: int, high: int, size: int) -> np.ndarray:
         # 生成普通离散数据
         return np.random.randint(low, high, size)
+
+    @classmethod
+    def generate_bernoulli_samplings(cls, p: float, size: int) -> np.ndarray:
+        # 生成伯努利离散数据
+        return scipy.stats.bernoulli.rvs(p=p, size=size)
+
+    @classmethod
+    def generate_binomial_sampling(cls, n: int, p: float, size: int) -> np.ndarray:
+        # 生成二项分布数据
+        return scipy.stats.binom.rvs(n=n, p=p, size=size)

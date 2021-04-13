@@ -23,7 +23,7 @@ class StudentTTestRelatedTwoVariables(StudentTTestTwoVariables):
         logging.info(f"{'StudentTTestRelatedTwoVariables':=^50}")
         logging.info(f"配对独立性检验要满足量样本正态或者样本之差正态，因为默认了同一样本，所以不需要方差齐性")
 
-    def t_test(self) -> TTestResult:
+    def test(self) -> TTestResult:
         if not NormalDistributionTest.test_normal_distribution(self.array_1 - self.array_2):
             if not self._check_normal():
                 return TTestResult(condition_satisfied=False, p_value=None, rejected=None)

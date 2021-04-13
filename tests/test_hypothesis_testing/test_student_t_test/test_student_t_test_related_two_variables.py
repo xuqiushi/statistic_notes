@@ -26,13 +26,13 @@ class TestStudentTTestDependencePairedVariables(unittest.TestCase):
             StudentTTestRelatedTwoVariables(
                 array_1, array_2, 0.05, TTestAlternative.TWO_SIDED
             )
-            .t_test()
+            .test()
             .condition_satisfied
         )
         self.assertTrue(
             StudentTTestRelatedTwoVariables(
                 array_1, array_3, 0.05, TTestAlternative.TWO_SIDED
             )
-            .t_test()
+            .test()
             .condition_satisfied
         )

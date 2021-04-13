@@ -42,6 +42,6 @@ class TestStudentTTestIndependenceTwoVariables(unittest.TestCase):
     def _check_alternative(self, array_1, array_2, alternative):
         t_test_result = StudentTTestIndependentTwoVariables(
             array_1, array_2, 0.05, alternative
-        ).t_test()
+        ).test()
         self.assertTrue(t_test_result.condition_satisfied)
         self.assertTrue(not t_test_result.rejected)

@@ -38,7 +38,7 @@ class StudentTTestOneVariable:
         )
         logging.info(f"{'StudentTTestOneSample':=^50}")
 
-    def t_test(self) -> TTestResult:
+    def test(self) -> TTestResult:
         is_normal_distribution = NormalDistributionTest.test_normal_distribution(
             self.array
         )
@@ -67,4 +67,4 @@ class StudentTTestOneVariable:
 
 
 if __name__ == "__main__":
-    StudentTTestOneVariable(np.array([1, 2, 3]), 2).t_test()
+    StudentTTestOneVariable(np.array([1, 2, 3]), 2).test()
