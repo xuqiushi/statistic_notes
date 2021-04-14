@@ -32,7 +32,12 @@ class ChiSquareIndependentTwoVariables:
         condition_check_result = self._check_condition(cross_table)
         if condition_check_result:
             logging.info(f"格子频数满足要求")
-            statistic, p = scipy.stats.chisquare(cross_table[0], cross_table[1])
+            statistic, p, dof, expected = scipy.stats.chi2_contingency(cross_table)
+            logging.info(f"origin: \n{cross_table}")
+            logging.info(f"statistic: {statistic}")
+            logging.info(f"p: {p}")
+            logging.info(f"degree of freedom: {dof}")
+            logging.info(f"expected: \n{expected}")
             return ChiSquareResult(True, p, p <= self.p_thread)
         else:
             logging.info(f"格子数量不满足要求，使用Fisher exact test")

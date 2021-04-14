@@ -1,7 +1,5 @@
 import unittest
 
-import numpy as np
-
 from data_mocker.distribution_sampling import DistributionSampling
 from hypothesis_testing.chi_square_test.chi_square_independent_two_variables import (
     ChiSquareIndependentTwoVariables,

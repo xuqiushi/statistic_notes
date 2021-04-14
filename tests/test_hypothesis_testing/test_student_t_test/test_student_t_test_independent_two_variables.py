@@ -45,3 +45,7 @@ class TestStudentTTestIndependenceTwoVariables(unittest.TestCase):
         ).test()
         self.assertTrue(t_test_result.condition_satisfied)
         self.assertTrue(not t_test_result.rejected)
+
+
+if __name__ == "__main__":
+    unittest.main()

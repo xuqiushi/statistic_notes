@@ -36,3 +36,7 @@ class TestStudentTTestDependencePairedVariables(unittest.TestCase):
             .test()
             .condition_satisfied
         )
+
+
+if __name__ == "__main__":
+    unittest.main()
