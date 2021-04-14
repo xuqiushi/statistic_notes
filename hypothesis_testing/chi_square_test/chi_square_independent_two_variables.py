@@ -1,11 +1,10 @@
 import logging
-from typing import Optional
-
 import pandas as pd
 import numpy as np
 import scipy.stats
 
-from hypothesis_testing.chi_square_test.entity.chi_square_result import ChiSquareResult
+
+from hypothesis_testing.entity.compare_variable_result import CompareVariableResult
 
 
 class ChiSquareIndependentTwoVariables:
@@ -27,7 +26,7 @@ class ChiSquareIndependentTwoVariables:
         logging.info(f"{'ChiSquareIndependentTwoVariables':=^50}")
         logging.info(f"卡方检验，需要保证格子中频数")
 
-    def test(self):
+    def test(self) -> CompareVariableResult:
         cross_table = self._get_cross_table()
         condition_check_result = self._check_condition(cross_table)
         if condition_check_result:
@@ -38,11 +37,11 @@ class ChiSquareIndependentTwoVariables:
             logging.info(f"p: {p}")
             logging.info(f"degree of freedom: {dof}")
             logging.info(f"expected: \n{expected}")
-            return ChiSquareResult(True, p, p <= self.p_thread)
+            return CompareVariableResult(True, p, p <= self.p_thread)
         else:
             logging.info(f"格子数量不满足要求，使用Fisher exact test")
             statistic, p = scipy.stats.fisher_exact(cross_table)
-            return ChiSquareResult(True, p, p <= self.p_thread)
+            return CompareVariableResult(True, p, p <= self.p_thread)
 
     def _get_cross_table(self):
         type_column = np.concatenate(

@@ -2,9 +2,11 @@ import logging
 import numpy as np
 import scipy.stats
 
-from hypothesis_testing.distribution_test.normal_distribution_test import NormalDistributionTest
+from hypothesis_testing.distribution_test.normal_distribution_test import (
+    NormalDistributionTest,
+)
+from hypothesis_testing.entity.compare_variable_result import CompareVariableResult
 from hypothesis_testing.student_t_test.entity.t_test_constants import TTestAlternative
-from hypothesis_testing.student_t_test.entity.t_test_result import TTestResult
 
 
 class StudentTTestTwoVariables:
@@ -29,7 +31,7 @@ class StudentTTestTwoVariables:
             format="%(asctime)s - %(message)s", level=logging.INFO,
         )
 
-    def _get_p_result(self, p: float) -> TTestResult:
+    def _get_p_result(self, p: float) -> CompareVariableResult:
         # 返回是否在给定显著性水平下是否拒绝原假设
         if self.alternative == TTestAlternative.TWO_SIDED:
             logging.info(f"H0: array_1 == array_2")
@@ -43,7 +45,9 @@ class StudentTTestTwoVariables:
         else:
             raise ValueError(f"alternative must be TTestAlternative")
         logging.info(f"reject: {rejected}")
-        return TTestResult(condition_satisfied=True, p_value=p, rejected=rejected)
+        return CompareVariableResult(
+            condition_satisfied=True, p_value=p, rejected=rejected
+        )
 
     def _check_normal(self) -> bool:
         check_result = True

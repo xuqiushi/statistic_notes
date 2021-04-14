@@ -2,8 +2,8 @@ import logging
 import numpy as np
 import scipy.stats
 
+from hypothesis_testing.entity.compare_variable_result import CompareVariableResult
 from hypothesis_testing.student_t_test.entity.t_test_constants import TTestAlternative
-from hypothesis_testing.student_t_test.entity.t_test_result import TTestResult
 from hypothesis_testing.student_t_test.student_t_test_two_variables.student_t_test_two_variables import (
     StudentTTestTwoVariables,
 )
@@ -26,7 +26,7 @@ class StudentTTestIndependentTwoVariables(StudentTTestTwoVariables):
         logging.info(f"{'StudentTTestIndependentTwoVariables':=^50}")
         logging.info(f"双样本独立性检验务必要完善实验设计，保证双样本是互相独立的")
 
-    def test(self) -> TTestResult:
+    def test(self) -> CompareVariableResult:
         if not self._check_normal():
             statistic, p = scipy.stats.mannwhitneyu(
                 self.array_1, self.array_2, alternative=str(self.alternative.value)
